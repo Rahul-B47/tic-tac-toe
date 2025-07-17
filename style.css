@@ -1,80 +1,153 @@
-*{
-    margin:0;
-    padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+:root {
+  --cyan: #00f0ff;
+  --magenta: #ff00c8;
+  --dark-bg: #0a0014;
 }
 
-body{
-    background-color: #548687;
-    text-align: center;
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.container{
-    height: 70vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body {
+  background-color: var(--dark-bg);
+  font-family: 'Orbitron', sans-serif;
+  color: var(--cyan);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-.game{
-    height: 60vmin;
-    width: 60vmin;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5vmin;
+h1 {
+  color: var(--magenta);
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px var(--magenta);
+  animation: glowText 2s infinite alternate;
 }
 
-.box{
-    height:18vmin;
-    width:18vmin;
-    border-radius: 1rem;
-    border: none;
-    box-shadow: 0 0 1rem rgba(0, 0,0, 0.3);
-    font-size: 8vmin;
-    color: #b0413e;
-    background-color:#ffffc7;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#reset-btn{
-    padding: 1rem;
-    font-size: 1.25rem;
-    background-color: #191913;
-    color:white ;
-    border-radius: 1rem;
-    border: none;
-
-}
-#new-btn{
-    padding: 1rem;
-    font-size: 1.25rem;
-    background-color: #191913;
-    color:white ;
-    border-radius: 1rem;
-    border: none;
+.game {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-gap: 15px;
+  padding: 20px;
 }
 
-#msg{
-    color: #ffffc7;
-    font-size: 8vmin;
+.box {
+  height: 100px;
+  width: 100px;
+  font-size: 2rem;
+  background-color: transparent;
+  color: var(--magenta);
+  border: 2px solid var(--cyan);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-shadow: 0 0 10px var(--magenta);
 }
 
-.msg-container{
-    height: 80vmin;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 4rem;
-
+.box:hover {
+  background-color: rgba(255, 0, 200, 0.1);
+  transform: scale(1.05);
 }
 
-.hide{
-   display: none; 
+.box.o-color {
+  color: var(--cyan);
+  text-shadow: 0 0 10px var(--cyan);
 }
 
-.o-color {
-    color:hwb(0 0% 100%); /* Change this to your desired color */
+#reset-btn, #new-btn {
+  margin-top: 20px;
+  padding: 10px 25px;
+  font-size: 1.2rem;
+  border: none;
+  background: var(--magenta);
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 15px var(--magenta);
+  transition: 0.3s ease;
+}
+
+#reset-btn:hover, #new-btn:hover {
+  background: var(--cyan);
+  box-shadow: 0 0 15px var(--cyan);
+}
+
+/* Winner Message Popup */
+.msg-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(10, 0, 20, 0.95);
+  padding: 30px 40px;
+  border: 2px solid var(--cyan);
+  border-radius: 20px;
+  text-align: center;
+  z-index: 999;
+  display: none;
+  animation: popFade 0.4s ease forwards;
+  box-shadow: 0 0 25px var(--cyan);
+}
+
+.msg-container p {
+  font-size: 2rem;
+  color: var(--cyan);
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px var(--cyan), 0 0 20px var(--magenta);
+}
+
+.msg-container button {
+  padding: 10px 20px;
+  background-color: var(--magenta);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--magenta);
+  transition: 0.3s ease;
+}
+
+.msg-container button:hover {
+  background-color: var(--cyan);
+  box-shadow: 0 0 15px var(--cyan);
+}
+
+.hide {
+  display: none;
+}
+
+/* Animations */
+@keyframes popFade {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glowText {
+  from {
+    text-shadow: 0 0 10px var(--magenta), 0 0 20px var(--cyan);
+  }
+  to {
+    text-shadow: 0 0 20px var(--cyan), 0 0 30px var(--magenta);
+  }
 }
